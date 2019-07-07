@@ -52,6 +52,24 @@ BigInt::~BigInt() {
     mpz_clear(data);
 }
 
+BigInt &BigInt::operator--() {
+    *this -= 1;
+    return *this;
+}
+
+BigInt &BigInt::operator++() {
+    *this += 1;
+    return *this;
+}
+
+BigInt operator <<(BigInt left, const BigInt &right) {
+
+}
+
+bool operator!(const BigInt &val) {
+    return val == 0;
+}
+
 BigInt operator +(BigInt left, unsigned int right) {
     mpz_add_ui(left.data, left.data, right);
     return left;

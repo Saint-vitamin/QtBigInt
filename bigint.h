@@ -34,18 +34,23 @@ public:
 
     friend BigInt operator + ( BigInt left, const BigInt& right);
     friend BigInt operator + ( BigInt left, unsigned int right);
+    friend BigInt operator + ( BigInt left, int right);
+
     friend BigInt& operator += ( BigInt &left, unsigned int right);
     friend BigInt& operator += ( BigInt &left, const BigInt& right);
 
     friend BigInt operator - ( BigInt left, const BigInt& right);
     friend BigInt operator - (unsigned int right, BigInt left);
     friend BigInt operator - ( BigInt left, unsigned int right);
+    friend BigInt operator - ( BigInt left, int right);
     friend BigInt& operator -= ( BigInt &left, unsigned int right);
     friend BigInt& operator -= ( BigInt &left, const BigInt& right);
 
 
     friend BigInt operator / ( BigInt left, const BigInt& right);
     friend BigInt operator / ( BigInt left, unsigned int right);
+    friend BigInt operator / ( BigInt left, int right);
+
     friend BigInt& operator /= ( BigInt &left, unsigned int right);
     friend BigInt& operator /= ( BigInt &left, const BigInt& right);
 
@@ -60,18 +65,49 @@ public:
 
     friend BigInt operator % ( BigInt left, const BigInt& right);
     friend BigInt operator % ( BigInt left, unsigned int right);
+    friend BigInt operator % ( BigInt left, int right);
+
+
     friend BigInt& operator %= ( BigInt &left, unsigned int right);
     friend BigInt& operator %= ( BigInt &left, const BigInt& right);
 
 
     friend bool operator == ( const BigInt& left, const BigInt& right);
     friend bool operator != ( const BigInt& left, const BigInt& right);
+    friend bool operator == ( const BigInt& left, int right); //to do
+    friend bool operator != ( const BigInt& left, int right); //to do
+
 
     friend bool operator < ( const BigInt& left, const BigInt& right);
     friend bool operator > ( const BigInt& left, const BigInt& right);
+    friend bool operator < ( const BigInt& left, int right);
+    friend bool operator > ( const BigInt& left, int right);
+
 
     friend bool operator <= ( const BigInt& left, const BigInt& right);
     friend bool operator >= ( const BigInt& left, const BigInt& right);
+    friend bool operator <= ( const BigInt& left, int right);
+    friend bool operator >= ( const BigInt& left, int right);
+
+    friend bool operator!(const BigInt& val);
+
+    friend BigInt operator << ( BigInt left, const BigInt& right);
+    friend BigInt operator << ( BigInt left, unsigned int right);
+    friend BigInt operator << ( BigInt left, int right);
+
+    friend BigInt& operator <<= ( BigInt &left, unsigned int right);
+    friend BigInt& operator <<= ( BigInt &left, const BigInt& right);
+
+    friend BigInt operator >> ( BigInt left, const BigInt& right);
+    friend BigInt operator >> ( BigInt left, unsigned int right);
+    friend BigInt& operator >>= ( BigInt &left, unsigned int right);
+    friend BigInt& operator >>= ( BigInt &left, const BigInt& right);
+
+    BigInt& operator-- ();
+    BigInt& operator++ ();
+
+    friend BigInt& operator~ (BigInt& val);
+    operator bool() const;
 };
 
 #endif // BIGINT_H

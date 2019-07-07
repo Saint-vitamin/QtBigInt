@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 VERSION = 6.1.2
 TARGET = minigmp
 
+CONFIG += static
+
 CONFIG(release, debug|release): {
     DESTDIR="$$PWD/build/release"
 } else {
