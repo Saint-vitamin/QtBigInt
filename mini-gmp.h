@@ -1,6 +1,6 @@
 /* mini-gmp, a minimalistic implementation of a GNU GMP subset.
 
-Copyright 2011-2015 Free Software Foundation, Inc.
+Copyright 2011-2014 Free Software Foundation, Inc.
 
 This file is part of the GNU MP Library.
 
@@ -38,14 +38,8 @@ see https://www.gnu.org/licenses/.  */
 #ifndef __MINI_GMP_H__
 #define __MINI_GMP_H__
 
-#ifndef KERNEL
 /* For size_t */
-# include <stddef.h>
-#endif
-
-#if defined (__cplusplus)
-extern "C" {
-#endif
+#include <stddef.h>
 
 void mp_set_memory_functions (void *(*) (size_t),
 			      void *(*) (void *, size_t, size_t),
@@ -84,7 +78,6 @@ void mpn_copyd (mp_ptr, mp_srcptr, mp_size_t);
 void mpn_zero (mp_ptr, mp_size_t);
 
 int mpn_cmp (mp_srcptr, mp_srcptr, mp_size_t);
-int mpn_zero_p (mp_srcptr, mp_size_t);
 
 mp_limb_t mpn_add_1 (mp_ptr, mp_srcptr, mp_size_t, mp_limb_t);
 mp_limb_t mpn_add_n (mp_ptr, mp_srcptr, mp_srcptr, mp_size_t);
@@ -131,10 +124,8 @@ int mpz_cmp_ui (const mpz_t, unsigned long);
 int mpz_cmp (const mpz_t, const mpz_t);
 int mpz_cmpabs_ui (const mpz_t, unsigned long);
 int mpz_cmpabs (const mpz_t, const mpz_t);
-#ifndef KERNEL
 int mpz_cmp_d (const mpz_t, double);
 int mpz_cmpabs_d (const mpz_t, double);
-#endif
 
 void mpz_abs (mpz_t, const mpz_t);
 void mpz_neg (mpz_t, const mpz_t);
@@ -241,9 +232,7 @@ int mpz_fits_slong_p (const mpz_t);
 int mpz_fits_ulong_p (const mpz_t);
 long int mpz_get_si (const mpz_t);
 unsigned long int mpz_get_ui (const mpz_t);
-#ifndef KERNEL
 double mpz_get_d (const mpz_t);
-#endif
 size_t mpz_size (const mpz_t);
 mp_limb_t mpz_getlimbn (const mpz_t, mp_size_t);
 
@@ -259,16 +248,12 @@ mpz_srcptr mpz_roinit_n (mpz_t, mp_srcptr, mp_size_t);
 void mpz_set_si (mpz_t, signed long int);
 void mpz_set_ui (mpz_t, unsigned long int);
 void mpz_set (mpz_t, const mpz_t);
-#ifndef KERNEL
 void mpz_set_d (mpz_t, double);
-#endif
 
 void mpz_init_set_si (mpz_t, signed long int);
 void mpz_init_set_ui (mpz_t, unsigned long int);
 void mpz_init_set (mpz_t, const mpz_t);
-#ifndef KERNEL
 void mpz_init_set_d (mpz_t, double);
-#endif
 
 size_t mpz_sizeinbase (const mpz_t, int);
 char *mpz_get_str (char *, int, const mpz_t);
@@ -278,7 +263,7 @@ int mpz_init_set_str (mpz_t, const char *, int);
 /* This long list taken from gmp.h. */
 /* For reference, "defined(EOF)" cannot be used here.  In g++ 2.95.4,
    <iostream> defines EOF but not FILE.  */
-#if defined (FILE) && !defined(KERNEL)                          \
+#if defined (FILE)                                              \
   || defined (H_STDIO)                                          \
   || defined (_H_STDIO)               /* AIX */                 \
   || defined (_STDIO_H)               /* glibc, Sun, SCO */     \
@@ -299,27 +284,5 @@ size_t mpz_out_str (FILE *, int, const mpz_t);
 void mpz_import (mpz_t, size_t, int, size_t, int, size_t, const void *);
 void *mpz_export (void *, size_t *, int, size_t, int, size_t, const mpz_t);
 
-#define __gmpz_add mpz_add
-#define __gmpz_clear mpz_clear
-#define __gmpz_cmp mpz_cmp
-#define __gmpz_com mpz_com
-#define __gmpz_get_si mpz_get_si
-#define __gmpz_get_ui mpz_get_ui
-#define __gmpz_init mpz_init
-#define __gmpz_init_set mpz_init_set
-#define __gmpz_init_set_si mpz_init_set_si
-#define __gmpz_init_set_str mpz_init_set_str
-#define __gmpz_init_set_ui mpz_init_set_ui
-#define __gmpz_mul mpz_mul
-#define __gmpz_neg mpz_neg
-#define __gmpz_set mpz_set
-#define __gmpz_set_si mpz_set_si
-#define __gmpz_set_ui mpz_set_ui
-#define __gmpz_sub mpz_sub
-#define __gmpz_tdiv_q mpz_tdiv_q
-#define __gmpz_tdiv_r mpz_tdiv_r
 
-#if defined (__cplusplus)
-}
-#endif
 #endif /* __MINI_GMP_H__ */
