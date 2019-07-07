@@ -9,6 +9,7 @@
 *.ko
 *.obj
 *.elf
+*.user
 
 # Precompiled Headers
 *.gch
@@ -45,3 +46,4 @@ modules.order
 *.o.cmd
 *.ko.cmd
 .tmp_versions/
+*pro.user*
