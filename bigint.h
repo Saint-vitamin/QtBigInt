@@ -1,14 +1,23 @@
+//#
+//# Copyright (C) 2018-2019 QuasarApp.
+//# Distributed under the lgplv3 software license, see the accompanying
+//# Everyone is permitted to copy and distribute verbatim copies
+//# of this license document, but changing it is not allowed.
+//#
+
+
 #ifndef BIGINT_H
 #define BIGINT_H
 #include "mini-gmp.h"
 #include <string>
 #include <vector>
+#include "minigmp_global.h"
 
 /**
  * @brief The BigInt class - c++ minigmp wrapper
  */
 
-class BigInt
+class UNTITLEDSHARED_EXPORT BigInt
 {
     mpz_t data;
 public:

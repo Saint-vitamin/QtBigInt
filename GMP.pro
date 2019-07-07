@@ -1,3 +1,11 @@
+#
+# Copyright (C) 2018-2019 QuasarApp.
+# Distributed under the lgplv3 software license, see the accompanying
+# Everyone is permitted to copy and distribute verbatim copies
+# of this license document, but changing it is not allowed.
+#
+
+
 QT       -= core gui
 
 TARGET = MiniGMP
@@ -6,11 +14,17 @@ TEMPLATE = lib
 DEFINES += MINIGMP_LIBRARY
 DEFINES += QT_DEPRECATED_WARNINGS
 
-VERSION = 6.0.0
+VERSION = 6.1.2
+TARGET = minigmp
+
+CONFIG(release, debug|release): {
+    DESTDIR="$$PWD/build/release"
+} else {
+    DESTDIR="$$PWD/build/debug"
+}
 
 DISTFILES += \
     README \
-    gen_export.sh
 
 HEADERS += \
     bigint.h \
