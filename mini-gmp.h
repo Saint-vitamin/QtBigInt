@@ -41,13 +41,17 @@ see https://www.gnu.org/licenses/.  */
 /* For size_t */
 #include <stddef.h>
 
+#if defined (__cplusplus)
+extern "C" {
+#endif
+
 void mp_set_memory_functions (void *(*) (size_t),
-			      void *(*) (void *, size_t, size_t),
-			      void (*) (void *, size_t));
+                  void *(*) (void *, size_t, size_t),
+                  void (*) (void *, size_t));
 
 void mp_get_memory_functions (void *(**) (size_t),
-			      void *(**) (void *, size_t, size_t),
-			      void (**) (void *, size_t));
+                  void *(**) (void *, size_t, size_t),
+                  void (**) (void *, size_t));
 
 typedef unsigned long mp_limb_t;
 typedef long mp_size_t;
@@ -59,10 +63,10 @@ typedef const mp_limb_t *mp_srcptr;
 typedef struct
 {
   int _mp_alloc;		/* Number of *limbs* allocated and pointed
-				   to by the _mp_d field.  */
+                   to by the _mp_d field.  */
   int _mp_size;			/* abs(_mp_size) is the number of limbs the
-				   last field points to.  If _mp_size is
-				   negative this is a negative number.  */
+                   last field points to.  If _mp_size is
+                   negative this is a negative number.  */
   mp_limb_t *_mp_d;		/* Pointer to the limbs.  */
 } __mpz_struct;
 
@@ -284,5 +288,7 @@ size_t mpz_out_str (FILE *, int, const mpz_t);
 void mpz_import (mpz_t, size_t, int, size_t, int, size_t, const void *);
 void *mpz_export (void *, size_t *, int, size_t, int, size_t, const mpz_t);
 
-
+#if defined (__cplusplus)
+}
+#endif
 #endif /* __MINI_GMP_H__ */

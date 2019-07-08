@@ -7,6 +7,7 @@
 
 #include "bigint.h"
 
+// constructors
 BigInt::BigInt() {
     mpz_init(data);
 }
@@ -52,27 +53,18 @@ BigInt::~BigInt() {
     mpz_clear(data);
 }
 
-BigInt &BigInt::operator--() {
-    *this -= 1;
-    return *this;
-}
-
-BigInt &BigInt::operator++() {
-    *this += 1;
-    return *this;
-}
-
-BigInt operator <<(BigInt left, const BigInt &right) {
-
-}
-
-bool operator!(const BigInt &val) {
-    return val == 0;
-}
-
+//  add operators
 BigInt operator +(BigInt left, unsigned int right) {
     mpz_add_ui(left.data, left.data, right);
     return left;
+}
+
+BigInt operator +(BigInt left, int right) {
+    if (right > 0) {
+        return left + static_cast<unsigned int>(right);
+    }
+
+    return left - right;
 }
 
 BigInt operator +(BigInt left, const BigInt &right) {
@@ -85,60 +77,19 @@ BigInt& operator +=(BigInt &left, unsigned int right) {
     return left;
 }
 
+BigInt& operator +=(BigInt &left, int right) {
+    if (right > 0) {
+        return left += static_cast<unsigned int>(right);
+    }
+    return left -= right;
+}
+
 BigInt& operator +=(BigInt &left, const BigInt &right) {
     mpz_add(left.data, left.data, right.data);
     return left;
 }
 
-BigInt operator *(BigInt left, const BigInt &right) {
-    mpz_mul(left.data, left.data, right.data);
-    return left;
-}
-
-BigInt operator *(BigInt left, int right) {
-    mpz_mul_si(left.data, left.data, right);
-    return left;
-}
-
-BigInt operator *(BigInt left, unsigned int right) {
-    mpz_mul_ui(left.data, left.data, right);
-    return left;
-}
-
-BigInt& operator *=(BigInt &left, const BigInt &right) {
-    mpz_mul(left.data, left.data, right.data);
-    return left;
-}
-
-BigInt& operator *=(BigInt &left, int right) {
-    mpz_mul_si(left.data, left.data, right);
-    return left;
-}
-
-BigInt& operator *=(BigInt &left, unsigned int right) {
-    mpz_mul_ui(left.data, left.data, right);
-    return left;
-}
-
-BigInt operator /(BigInt left, const BigInt &right) {
-    mpz_fdiv_r(left.data, left.data, right.data);
-    return left;
-}
-
-BigInt operator /(BigInt left, unsigned int right) {
-    mpz_fdiv_r_ui(left.data, left.data, right);
-    return left;
-}
-
-BigInt& operator /=(BigInt &left, const BigInt &right) {
-    mpz_fdiv_r(left.data, left.data, right.data);
-    return left;
-}
-
-BigInt& operator /=(BigInt &left, unsigned int right) {
-    mpz_fdiv_r_ui(left.data, left.data, right);
-    return left;
-}
+//  sub operators
 
 BigInt operator -(BigInt left, const BigInt &right) {
     mpz_sub(left.data, left.data, right.data);
@@ -155,6 +106,20 @@ BigInt operator -(unsigned int left, BigInt right) {
     return right;
 }
 
+BigInt operator -(BigInt left, int right) {
+    if (right > 0) {
+        return left - static_cast<unsigned int>(right);
+    }
+    return left + right;
+}
+
+BigInt operator -(int left, BigInt right) {
+    if (right > 0) {
+        return static_cast<unsigned int>(left) - right;
+    }
+    return right + left;
+}
+
 BigInt& operator -=(BigInt &left, const BigInt &right) {
     mpz_sub(left.data, left.data, right.data);
     return left;
@@ -165,6 +130,100 @@ BigInt& operator -=(BigInt &left, unsigned int right) {
     return left;
 }
 
+BigInt& operator -=(BigInt &left, int right) {
+    if (right > 0) {
+        return left -= static_cast<unsigned int>(right);
+    }
+    return left += right;
+}
+
+BigInt& operator -=(int left, BigInt & right) {
+    if (left > 0) {
+        return static_cast<unsigned int>(left) -= right;
+    }
+
+    return right =  right + left;
+}
+
+BigInt& operator -=(unsigned int left, BigInt & right) {
+    return right = left - right;
+}
+
+//  div operators
+
+BigInt operator /(BigInt left, const BigInt &right) {
+    mpz_fdiv_r(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt operator /(BigInt left, unsigned int right) {
+    mpz_fdiv_r_ui(left.data, left.data, right);
+    return left;
+}
+
+BigInt operator /(BigInt left, int right) {
+    if (right > 0) {
+        return left / static_cast<unsigned int>(right);
+    }
+    return 0 - (left / static_cast<unsigned int>(right));
+}
+
+BigInt& operator /=(BigInt &left, const BigInt &right) {
+    mpz_fdiv_r(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt& operator /=(BigInt &left, unsigned int right) {
+    mpz_fdiv_r_ui(left.data, left.data, right);
+    return left;
+}
+
+BigInt& operator /=(BigInt &left, int right) {
+    if (right > 0) {
+        return left /= static_cast<unsigned int>(right);
+    }
+    return 0 -= (left /= static_cast<unsigned int>(right));
+}
+
+// mul operators
+
+
+
+BigInt operator *(BigInt left, const BigInt &right) {
+    mpz_mul(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt operator *(BigInt left, int right) {
+    if (right > 0) {
+        return left * static_cast<unsigned int>(right);
+    }
+    return 0 - (left * static_cast<unsigned int>(right));
+}
+
+BigInt operator *(BigInt left, unsigned int right) {
+    mpz_mul_ui(left.data, left.data, right);
+    return left;
+}
+
+BigInt& operator *=(BigInt &left, const BigInt &right) {
+    mpz_mul(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt& operator *=(BigInt &left, int right) {
+    if (right > 0) {
+        return left *= static_cast<unsigned int>(right);
+    }
+    return 0 -= (left *= static_cast<unsigned int>(right));
+}
+
+BigInt& operator *=(BigInt &left, unsigned int right) {
+    mpz_mul_ui(left.data, left.data, right);
+    return left;
+}
+
+//mod operations
 BigInt operator %(BigInt left, const BigInt &right) {
     mpz_mod(left.data, left.data, right.data);
     return left;
@@ -173,6 +232,14 @@ BigInt operator %(BigInt left, const BigInt &right) {
 BigInt operator %(BigInt left, unsigned int right) {
     mpz_mod_ui(left.data, left.data, right);
     return left;
+}
+
+BigInt operator %(BigInt left, int right) {
+    if (right > 0) {
+        return left % static_cast<unsigned int>(right);
+    }
+
+    throw " mod with negativ value  not sopported";
 }
 
 BigInt& operator %=(BigInt& left, const BigInt &right) {
@@ -184,6 +251,28 @@ BigInt& operator %=(BigInt& left, unsigned int right) {
     mpz_mod_ui(left.data, left.data, right);
     return left;
 }
+
+BigInt& operator %=(BigInt& left, int right) {
+    if (right > 0) {
+        return left %= static_cast<unsigned int>(right);
+    }
+    throw " mod with negativ value  not sopported";
+}
+
+BigInt &BigInt::operator--() {
+    *this -= 1;
+    return *this;
+}
+
+BigInt &BigInt::operator++() {
+    *this += 1;
+    return *this;
+}
+
+bool operator!(const BigInt &val) {
+    return val == 0;
+}
+
 
 bool operator == (const BigInt& left, const BigInt& right) {
     return mpz_cmp(left.data, right.data) == 0;
@@ -207,4 +296,69 @@ bool operator <= ( const BigInt &left, const BigInt& right) {
 
 bool operator >= ( const BigInt &left, const BigInt& right) {
     return mpz_cmp(left.data, right.data) >= 0;
+}
+
+BigInt operator >>(BigInt left, unsigned int right) {
+    mpn_rshift(left.data->_mp_d,
+               left.data->_mp_d,
+               left.data->_mp_size,
+               right);
+    return left;
+}
+
+BigInt operator <<(BigInt left, unsigned int right) {
+    mpn_lshift(left.data->_mp_d,
+               left.data->_mp_d,
+               left.data->_mp_size,
+               static_cast<unsigned int>(right));
+    return left;
+}
+
+BigInt& operator >>=(BigInt &left, unsigned int right) {
+    mpn_rshift(left.data->_mp_d,
+               left.data->_mp_d,
+               left.data->_mp_size,
+               static_cast<unsigned int>(right));
+    return left;
+}
+
+BigInt& operator <<=(BigInt &left, unsigned int right) {
+    mpn_lshift(left.data->_mp_d,
+               left.data->_mp_d,
+               left.data->_mp_size,
+               static_cast<unsigned int>(right));
+    return left;
+}
+
+
+BigInt operator >>(BigInt left, int right) {
+    if (right > 0) {
+        return left >> static_cast<unsigned int> (right);
+    }
+
+    return left << right;
+}
+
+BigInt operator <<(BigInt left, int right) {
+    if (right > 0) {
+        return left << static_cast<unsigned int> (right);
+    }
+
+    return left >> right;
+}
+
+BigInt& operator >>=(BigInt &left, int right) {
+    if (right > 0) {
+        return left >>= static_cast<unsigned int>(right);
+    }
+
+    return left <<= right;
+}
+
+BigInt& operator <<=(BigInt &left, int right) {
+    if (right > 0) {
+        return left <<= static_cast<unsigned int>(right);
+    }
+
+    return left >>= right;
 }
