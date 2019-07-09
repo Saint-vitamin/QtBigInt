@@ -147,7 +147,7 @@ BigInt& operator -=(BigInt &left, int right) {
 }
 
 BigInt& operator -=(int left, BigInt & right) {
-    if (left > 0) {
+    if (left >= 0) {
         return static_cast<unsigned int>(left) -= right;
     }
 
@@ -511,8 +511,8 @@ bool operator >= ( const BigInt &left, int right) {
     return mpz_cmp_si(left.data, right) >= 0;
 }
 
-// cast operations
+//// cast operations
 
-BigInt::operator bool() const {
-    return *this != 0;
-}
+//BigInt::operator bool() const {
+//    return *this != 0;
+//}

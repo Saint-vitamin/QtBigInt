@@ -151,7 +151,6 @@ public:
     friend BigInt& operator^= (BigInt &left, int right);
     friend BigInt& operator^= (BigInt &left, unsigned int right);
 
-    operator bool() const;
 };
 
 #endif // BIGINT_H
