@@ -269,34 +269,7 @@ BigInt &BigInt::operator++() {
     return *this;
 }
 
-bool operator!(const BigInt &val) {
-    return val == 0;
-}
-
-
-bool operator == (const BigInt& left, const BigInt& right) {
-    return mpz_cmp(left.data, right.data) == 0;
-}
-
-bool operator != (const BigInt &left, const BigInt& right) {
-    return mpz_cmp(left.data, right.data) != 0;
-}
-
-bool operator < ( const BigInt &left, const BigInt& right) {
-    return mpz_cmp(left.data, right.data) < 0;
-}
-
-bool operator > ( const BigInt &left, const BigInt& right) {
-    return mpz_cmp(left.data, right.data) > 0;
-}
-
-bool operator <= ( const BigInt &left, const BigInt& right) {
-    return mpz_cmp(left.data, right.data) <= 0;
-}
-
-bool operator >= ( const BigInt &left, const BigInt& right) {
-    return mpz_cmp(left.data, right.data) >= 0;
-}
+// move operators
 
 BigInt operator >>(BigInt left, unsigned int right) {
     mpn_rshift(left.data->_mp_d,
@@ -361,4 +334,174 @@ BigInt& operator <<=(BigInt &left, int right) {
     }
 
     return left >>= right;
+}
+
+// other bin operators
+BigInt operator ~(BigInt left) {
+    mpz_com(left.data, left.data);
+    return left;
+}
+
+BigInt operator |(BigInt left, const BigInt &right) {
+    mpz_ior(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt operator |(const BigInt &left, int right) {
+    return left | BigInt(right);
+}
+
+BigInt operator |(const BigInt &left, unsigned int right) {
+    return left | BigInt(right);
+}
+
+BigInt& operator |=(BigInt &left, const BigInt &right) {
+    mpz_ior(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt& operator |=(BigInt &left, int right) {
+    return left |= BigInt(right);
+}
+
+BigInt& operator |=(BigInt &left, unsigned int right) {
+    return left |= BigInt(right);
+}
+
+BigInt operator &(BigInt left, const BigInt &right) {
+    mpz_and(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt operator &(const BigInt &left, int right) {
+    return left & BigInt(right);
+}
+
+BigInt operator &(const BigInt &left, unsigned int right) {
+    return left & BigInt(right);
+}
+
+BigInt& operator &=(BigInt &left, const BigInt &right) {
+    mpz_and(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt& operator &=(BigInt &left, int right) {
+    return left &= BigInt(right);
+}
+
+BigInt& operator &=(BigInt &left, unsigned int right) {
+    return left &= BigInt(right);
+}
+
+BigInt operator ^(BigInt left, const BigInt &right) {
+    mpz_xor(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt operator ^(const BigInt &left, int right) {
+    return left ^ BigInt(right);
+}
+
+BigInt operator ^(const BigInt &left, unsigned int right) {
+    return left ^ BigInt(right);
+}
+
+BigInt& operator ^=(BigInt &left, const BigInt &right) {
+    mpz_xor(left.data, left.data, right.data);
+    return left;
+}
+
+BigInt& operator ^=(BigInt &left, int right) {
+    return left ^= BigInt(right);
+}
+
+BigInt& operator ^=(BigInt &left, unsigned int right) {
+    return left ^= BigInt(right);
+}
+
+
+// logic operators
+
+bool operator!(const BigInt &val) {
+    return val == 0;
+}
+
+bool operator == (const BigInt& left, const BigInt& right) {
+    return mpz_cmp(left.data, right.data) == 0;
+}
+
+bool operator == (const BigInt& left, unsigned int right) {
+    return mpz_cmp_ui(left.data, right) == 0;
+}
+
+bool operator == (const BigInt& left, int right) {
+    return mpz_cmp_si(left.data, right) == 0;
+}
+
+bool operator != (const BigInt &left, const BigInt& right) {
+    return !(left == right);
+}
+
+bool operator != (const BigInt &left, unsigned int right) {
+    return !(left == right);
+}
+
+bool operator != (const BigInt &left, int right) {
+    return !(left == right);
+}
+
+bool operator < ( const BigInt &left, const BigInt& right) {
+    return mpz_cmp(left.data, right.data) < 0;
+}
+
+bool operator < ( const BigInt &left, unsigned int right) {
+    return mpz_cmp_ui(left.data, right) < 0;
+}
+
+bool operator < ( const BigInt &left, int right) {
+    return mpz_cmp_si(left.data, right) < 0;
+}
+
+bool operator > ( const BigInt &left, const BigInt& right) {
+    return mpz_cmp(left.data, right.data) > 0;
+}
+
+bool operator > ( const BigInt &left, unsigned int right) {
+    return mpz_cmp_ui(left.data, right) > 0;
+}
+
+bool operator > ( const BigInt &left, int right) {
+    return mpz_cmp_si(left.data, right) > 0;
+}
+
+
+bool operator <= ( const BigInt &left, const BigInt& right) {
+    return mpz_cmp(left.data, right.data) <= 0;
+}
+
+bool operator <= ( const BigInt &left, unsigned int right) {
+    return mpz_cmp_ui(left.data, right) <= 0;
+}
+
+bool operator <= ( const BigInt &left, int right) {
+    return mpz_cmp_si(left.data, right) <= 0;
+}
+
+bool operator >= ( const BigInt &left, const BigInt& right) {
+    return mpz_cmp(left.data, right.data) >= 0;
+}
+
+bool operator >= ( const BigInt &left, unsigned int right) {
+    return mpz_cmp_ui(left.data, right) >= 0;
+}
+
+bool operator >= ( const BigInt &left, int right) {
+    return mpz_cmp_si(left.data, right) >= 0;
+}
+
+// cast operations
+
+BigInt::operator bool() const {
+    return *this != 0;
 }
