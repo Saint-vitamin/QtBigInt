@@ -63,7 +63,7 @@ BigInt operator +(BigInt left, unsigned int right) {
 }
 
 BigInt operator +(BigInt left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left + static_cast<unsigned int>(right);
     }
 
@@ -81,7 +81,7 @@ BigInt& operator +=(BigInt &left, unsigned int right) {
 }
 
 BigInt& operator +=(BigInt &left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left += static_cast<unsigned int>(right);
     }
     return left -= right;
@@ -110,14 +110,14 @@ BigInt operator -(unsigned int left, BigInt right) {
 }
 
 BigInt operator -(BigInt left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left - static_cast<unsigned int>(right);
     }
     return left + right;
 }
 
 BigInt operator -(int left, BigInt right) {
-    if (right > 0) {
+    if (right >= 0) {
         return static_cast<unsigned int>(left) - right;
     }
     return right + left;
@@ -134,7 +134,7 @@ BigInt& operator -=(BigInt &left, unsigned int right) {
 }
 
 BigInt& operator -=(BigInt &left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left -= static_cast<unsigned int>(right);
     }
     return left += right;
@@ -165,7 +165,7 @@ BigInt operator /(BigInt left, unsigned int right) {
 }
 
 BigInt operator /(BigInt left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left / static_cast<unsigned int>(right);
     }
     return 0 - (left / static_cast<unsigned int>(right));
@@ -182,7 +182,7 @@ BigInt& operator /=(BigInt &left, unsigned int right) {
 }
 
 BigInt& operator /=(BigInt &left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left /= static_cast<unsigned int>(right);
     }
     return 0 -= (left /= static_cast<unsigned int>(right));
@@ -198,7 +198,7 @@ BigInt operator *(BigInt left, const BigInt &right) {
 }
 
 BigInt operator *(BigInt left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left * static_cast<unsigned int>(right);
     }
     return 0 - (left * static_cast<unsigned int>(right));
@@ -215,7 +215,7 @@ BigInt& operator *=(BigInt &left, const BigInt &right) {
 }
 
 BigInt& operator *=(BigInt &left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left *= static_cast<unsigned int>(right);
     }
     return 0 -= (left *= static_cast<unsigned int>(right));
@@ -238,7 +238,7 @@ BigInt operator %(BigInt left, unsigned int right) {
 }
 
 BigInt operator %(BigInt left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left % static_cast<unsigned int>(right);
     }
 
@@ -256,7 +256,7 @@ BigInt& operator %=(BigInt& left, unsigned int right) {
 }
 
 BigInt& operator %=(BigInt& left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left %= static_cast<unsigned int>(right);
     }
     throw " mod with negativ value  not sopported";
@@ -308,7 +308,7 @@ BigInt& operator <<=(BigInt &left, unsigned int right) {
 
 
 BigInt operator >>(BigInt left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left >> static_cast<unsigned int> (right);
     }
 
@@ -316,7 +316,7 @@ BigInt operator >>(BigInt left, int right) {
 }
 
 BigInt operator <<(BigInt left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left << static_cast<unsigned int> (right);
     }
 
@@ -324,7 +324,7 @@ BigInt operator <<(BigInt left, int right) {
 }
 
 BigInt& operator >>=(BigInt &left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left >>= static_cast<unsigned int>(right);
     }
 
@@ -332,7 +332,7 @@ BigInt& operator >>=(BigInt &left, int right) {
 }
 
 BigInt& operator <<=(BigInt &left, int right) {
-    if (right > 0) {
+    if (right >= 0) {
         return left <<= static_cast<unsigned int>(right);
     }
 
