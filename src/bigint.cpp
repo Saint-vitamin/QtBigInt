@@ -67,7 +67,7 @@ BigInt operator +(BigInt left, int right) {
         return left + static_cast<unsigned int>(right);
     }
 
-    return left - right;
+    return left - static_cast<unsigned int>(std::abs(right));
 }
 
 BigInt operator +(BigInt left, const BigInt &right) {
@@ -84,7 +84,7 @@ BigInt& operator +=(BigInt &left, int right) {
     if (right >= 0) {
         return left += static_cast<unsigned int>(right);
     }
-    return left -= right;
+    return left -= static_cast<unsigned int>(std::abs(right));
 }
 
 BigInt& operator +=(BigInt &left, const BigInt &right) {
@@ -113,15 +113,21 @@ BigInt operator -(BigInt left, int right) {
     if (right >= 0) {
         return left - static_cast<unsigned int>(right);
     }
-    return left + right;
+    return left + static_cast<unsigned int>(std::abs(right));
 }
 
 BigInt operator -(int left, BigInt right) {
     if (right >= 0) {
         return static_cast<unsigned int>(left) - right;
     }
-    return right + left;
+    return right + static_cast<unsigned int>(std::abs(left));
 }
+
+BigInt operator-(BigInt val) {
+    mpz_neg(val.data, val.data);
+    return val;
+}
+
 
 BigInt& operator -=(BigInt &left, const BigInt &right) {
     mpz_sub(left.data, left.data, right.data);
@@ -137,7 +143,7 @@ BigInt& operator -=(BigInt &left, int right) {
     if (right >= 0) {
         return left -= static_cast<unsigned int>(right);
     }
-    return left += right;
+    return left += static_cast<unsigned int>(std::abs(right));
 }
 
 BigInt& operator -=(int left, BigInt & right) {
@@ -145,7 +151,7 @@ BigInt& operator -=(int left, BigInt & right) {
         return static_cast<unsigned int>(left) -= right;
     }
 
-    return right =  right + left;
+    return right =  right + static_cast<unsigned int>(std::abs(left));
 }
 
 BigInt& operator -=(unsigned int left, BigInt & right) {
@@ -168,7 +174,7 @@ BigInt operator /(BigInt left, int right) {
     if (right >= 0) {
         return left / static_cast<unsigned int>(right);
     }
-    return 0 - (left / static_cast<unsigned int>(right));
+    return 0 - (left / static_cast<unsigned int>(std::abs(right)));
 }
 
 BigInt& operator /=(BigInt &left, const BigInt &right) {
@@ -185,7 +191,7 @@ BigInt& operator /=(BigInt &left, int right) {
     if (right >= 0) {
         return left /= static_cast<unsigned int>(right);
     }
-    return 0 -= (left /= static_cast<unsigned int>(right));
+    return 0 -= (left /= static_cast<unsigned int>(std::abs(right)));
 }
 
 // mul operators
@@ -201,7 +207,7 @@ BigInt operator *(BigInt left, int right) {
     if (right >= 0) {
         return left * static_cast<unsigned int>(right);
     }
-    return 0 - (left * static_cast<unsigned int>(right));
+    return 0 - (left * static_cast<unsigned int>(std::abs(right)));
 }
 
 BigInt operator *(BigInt left, unsigned int right) {
@@ -218,7 +224,7 @@ BigInt& operator *=(BigInt &left, int right) {
     if (right >= 0) {
         return left *= static_cast<unsigned int>(right);
     }
-    return 0 -= (left *= static_cast<unsigned int>(right));
+    return 0 -= (left *= static_cast<unsigned int>(std::abs(right)));
 }
 
 BigInt& operator *=(BigInt &left, unsigned int right) {
@@ -262,6 +268,8 @@ BigInt& operator %=(BigInt& left, int right) {
     throw " mod with negativ value  not sopported";
 }
 
+
+// incriment and dicriment
 BigInt &BigInt::operator--() {
     *this -= 1;
     return *this;
@@ -312,7 +320,7 @@ BigInt operator >>(BigInt left, int right) {
         return left >> static_cast<unsigned int> (right);
     }
 
-    return left << right;
+    return left << static_cast<unsigned int>(std::abs(right));
 }
 
 BigInt operator <<(BigInt left, int right) {
@@ -320,7 +328,7 @@ BigInt operator <<(BigInt left, int right) {
         return left << static_cast<unsigned int> (right);
     }
 
-    return left >> right;
+    return left >> static_cast<unsigned int>(std::abs(right));
 }
 
 BigInt& operator >>=(BigInt &left, int right) {
@@ -328,7 +336,7 @@ BigInt& operator >>=(BigInt &left, int right) {
         return left >>= static_cast<unsigned int>(right);
     }
 
-    return left <<= right;
+    return left <<= static_cast<unsigned int>(std::abs(right));
 }
 
 BigInt& operator <<=(BigInt &left, int right) {
@@ -336,7 +344,7 @@ BigInt& operator <<=(BigInt &left, int right) {
         return left <<= static_cast<unsigned int>(right);
     }
 
-    return left >>= right;
+    return left >>= static_cast<unsigned int>(std::abs(right));
 }
 
 // other bin operators

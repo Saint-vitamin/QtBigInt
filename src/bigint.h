@@ -47,6 +47,7 @@ public:
     friend BigInt operator - ( BigInt left, unsigned int right);
     friend BigInt operator - ( BigInt left, int right);
     friend BigInt operator - ( int right, BigInt left);
+    friend BigInt operator-(BigInt val);
 
     friend BigInt& operator -= ( BigInt &left, unsigned int right);
     friend BigInt& operator -= ( BigInt &left, int right);
