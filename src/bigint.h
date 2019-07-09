@@ -17,7 +17,7 @@
  * @brief The BigInt class - c++ minigmp wrapper
  */
 
-class UNTITLEDSHARED_EXPORT BigInt
+class MINIGMPSHARED_EXPORT BigInt
 {
     mpz_t data;
 public:

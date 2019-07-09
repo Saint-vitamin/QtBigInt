@@ -9,11 +9,11 @@
 #define MINIGMP_GLOBAL_H
 
 #ifdef _WIN32
-#  define UNTITLEDSHARED_EXPORT __declspec(dllexport)
+#  define MINIGMPSHARED_EXPORT __declspec(dllexport)
 #endif
 
 #ifdef linux
-#  define UNTITLEDSHARED_EXPORT __attribute__((visibility("default")))
+#  define MINIGMPSHARED_EXPORT __attribute__((visibility("default")))
 #endif
 
 
