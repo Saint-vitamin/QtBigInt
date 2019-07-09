@@ -5,34 +5,15 @@
 # of this license document, but changing it is not allowed.
 #
 
+TEMPLATE = subdirs
+CONFIG += ordered
 
-QT       -= core gui
+SUBDIRS += \
+           src \
+           tests
 
-TARGET = MiniGMP
-TEMPLATE = lib
-
-DEFINES += MINIGMP_LIBRARY
-DEFINES += QT_DEPRECATED_WARNINGS
-
+include($$PWD/tests/test.pri)
 VERSION = 6.1.2
-TARGET = minigmp
 
-CONFIG += static
-
-CONFIG(release, debug|release): {
-    DESTDIR="$$PWD/build/release"
-} else {
-    DESTDIR="$$PWD/build/debug"
-}
-
-DISTFILES += \
-    README \
-
-HEADERS += \
-    bigint.h \
-    mini-gmp.h \
-    minigmp_global.h
-
-SOURCES += \
-    bigint.cpp \
-    mini-gmp.c
+src.file = src/GMP.pro
+tests.file = tests/tests.pro
