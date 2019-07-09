@@ -8,3 +8,5 @@ TEMPLATE = app
 TARGET = miniGmpTests
 
 SOURCES +=  tst_arithmetictests.cpp
+
+include(../GMP.pri)

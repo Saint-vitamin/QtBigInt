@@ -32,6 +32,8 @@ public:
     std::string getString(int base = 10) const;
     ~BigInt();
 
+    BigInt& operator = (const BigInt& val);
+
     friend BigInt operator + ( BigInt left, const BigInt& right);
     friend BigInt operator + ( BigInt left, unsigned int right);
     friend BigInt operator + ( BigInt left, int right);

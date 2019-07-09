@@ -43,14 +43,17 @@ BigInt::BigInt(double val):
 }
 
 std::string BigInt::getString(int base) const {
-    char *str = nullptr;
-    mpz_get_str(str, base, data);
-
+    char *str = mpz_get_str(nullptr, base, data);
     return str;
 }
 
 BigInt::~BigInt() {
     mpz_clear(data);
+}
+
+BigInt &BigInt::operator =(const BigInt &val) {
+    mpz_set(data, val.data);
+    return *this;
 }
 
 //  add operators
