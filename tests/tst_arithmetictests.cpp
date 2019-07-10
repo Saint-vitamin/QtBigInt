@@ -129,7 +129,9 @@ void arithmetictests::arithmeticAssignmentDivisionTest() {
 
     num3 /= num1;
     QVERIFY(num3 == "58758414362055909808086078831411583704925762083687648");
+
     num3 /= num2;
+
     QVERIFY(num3 == "-4077797765921675738706461");
     num3 /= num2 / num1;
     QVERIFY(num3 == 479745944);
@@ -151,6 +153,7 @@ void arithmetictests::arithmeticAssignmentModuloTest() {
 
     num3 %= num2;
     QVERIFY(num3 == "2998899812449910677529571999817489505831");
+
     num2 %= num1;
     QVERIFY(num2 == "-23415035301048583249");
     num3 %= num1;

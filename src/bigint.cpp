@@ -161,12 +161,12 @@ BigInt& operator -=(unsigned int left, BigInt & right) {
 //  div operators
 
 BigInt operator /(BigInt left, const BigInt &right) {
-    mpz_fdiv_r(left.data, left.data, right.data);
+    mpz_tdiv_q(left.data, left.data, right.data);
     return left;
 }
 
 BigInt operator /(BigInt left, unsigned int right) {
-    mpz_fdiv_r_ui(left.data, left.data, right);
+    mpz_tdiv_q_ui(left.data, left.data, right);
     return left;
 }
 
@@ -178,12 +178,12 @@ BigInt operator /(BigInt left, int right) {
 }
 
 BigInt& operator /=(BigInt &left, const BigInt &right) {
-    mpz_fdiv_r(left.data, left.data, right.data);
+    mpz_tdiv_q(left.data, left.data, right.data);
     return left;
 }
 
 BigInt& operator /=(BigInt &left, unsigned int right) {
-    mpz_fdiv_r_ui(left.data, left.data, right);
+    mpz_tdiv_q_ui(left.data, left.data, right);
     return left;
 }
 
@@ -234,12 +234,12 @@ BigInt& operator *=(BigInt &left, unsigned int right) {
 
 //mod operations
 BigInt operator %(BigInt left, const BigInt &right) {
-    mpz_mod(left.data, left.data, right.data);
+    mpz_tdiv_r(left.data, left.data, right.data);
     return left;
 }
 
 BigInt operator %(BigInt left, unsigned int right) {
-    mpz_mod_ui(left.data, left.data, right);
+    mpz_tdiv_r_ui(left.data, left.data, right);
     return left;
 }
 
@@ -252,12 +252,12 @@ BigInt operator %(BigInt left, int right) {
 }
 
 BigInt& operator %=(BigInt& left, const BigInt &right) {
-    mpz_mod(left.data, left.data, right.data);
+    mpz_tdiv_r(left.data, left.data, right.data);
     return left;
 }
 
 BigInt& operator %=(BigInt& left, unsigned int right) {
-    mpz_mod_ui(left.data, left.data, right);
+    mpz_tdiv_r_ui(left.data, left.data, right);
     return left;
 }
 
