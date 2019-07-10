@@ -244,11 +244,7 @@ BigInt operator %(BigInt left, unsigned int right) {
 }
 
 BigInt operator %(BigInt left, int right) {
-    if (right >= 0) {
-        return left % static_cast<unsigned int>(right);
-    }
-
-    throw " mod with negativ value  not sopported";
+    return left % static_cast<unsigned int>(std::abs(right));
 }
 
 BigInt& operator %=(BigInt& left, const BigInt &right) {
@@ -262,10 +258,7 @@ BigInt& operator %=(BigInt& left, unsigned int right) {
 }
 
 BigInt& operator %=(BigInt& left, int right) {
-    if (right >= 0) {
-        return left %= static_cast<unsigned int>(right);
-    }
-    throw " mod with negativ value  not sopported";
+    return left %= static_cast<unsigned int>(std::abs(right));
 }
 
 
