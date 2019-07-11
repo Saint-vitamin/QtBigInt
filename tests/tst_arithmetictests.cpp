@@ -1,5 +1,6 @@
 #include <QtTest>
 #include <bigint.h>
+#include <limits>
 
 // add necessary includes here
 
@@ -65,6 +66,8 @@ private slots:
 
     // Relational operators with BigInts and integers or strings
     void shiftingTest();
+
+    void testPerators();
 
     void constructorsTest();
 
@@ -700,6 +703,25 @@ void arithmetictests::shiftingTest() {
 
     num1 <<= 15;
     QVERIFY((num1 >>= 15) == num2);
+}
+
+void arithmetictests::testPerators() {
+    BigInt num1;
+
+    QVERIFY(num1.sizeBytes() == 0);
+    num1 = 1;
+
+    QVERIFY(num1.sizeBytes() == 8);
+
+    num1++;
+    QVERIFY(num1.sizeBytes() == 8);
+
+    num1+= 0xFF;
+    QVERIFY(num1.sizeBytes() == 8);
+
+    num1 += std::numeric_limits<long>::max();
+    QVERIFY(num1.sizeBytes() == 16);
+
 }
 
 

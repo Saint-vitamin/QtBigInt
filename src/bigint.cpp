@@ -66,7 +66,7 @@ BigInt::~BigInt() {
     mpz_clear(data);
 }
 
-BigInt &BigInt::powm(BigInt &pow, BigInt &mod) {
+BigInt &BigInt::powm(const BigInt &pow, const BigInt &mod) {
     mpz_powm(data, data, pow.data, mod.data);
     return *this;
 }
@@ -74,6 +74,14 @@ BigInt &BigInt::powm(BigInt &pow, BigInt &mod) {
 BigInt &BigInt::pow(unsigned int pow) {
     mpz_pow_ui(data, data, pow);
     return *this;
+}
+
+int BigInt::sizeBits() const {
+    return sizeBytes() * 8;
+}
+
+int BigInt::sizeBytes() const {
+    return static_cast<int>(mpz_size(data) * sizeof ((*data->_mp_d)));
 }
 
 BigInt BigInt::bigPow10(unsigned int pow) {

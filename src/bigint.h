@@ -34,8 +34,10 @@ public:
     std::string getString(int base = 10) const;
     ~BigInt();
 
-    BigInt& powm(BigInt& pow, BigInt &mod);
+    BigInt& powm(const BigInt &pow, const BigInt &mod);
     BigInt& pow(unsigned int pow);
+    int sizeBits() const;
+    int sizeBytes() const;
 
     /**
      * @brief bigPow10
