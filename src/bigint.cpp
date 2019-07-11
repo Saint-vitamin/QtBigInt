@@ -303,6 +303,18 @@ BigInt &BigInt::operator++() {
     return *this;
 }
 
+BigInt BigInt::operator--(int) {
+    BigInt temp(*this);
+    --*this;
+    return temp;
+}
+
+BigInt BigInt::operator++(int) {
+    BigInt temp(*this);
+    ++*this;
+    return temp;
+}
+
 // move operators
 
 BigInt operator >>(BigInt left, unsigned int right) {

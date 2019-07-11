@@ -137,6 +137,10 @@ public:
     BigInt& operator-- ();
     BigInt& operator++ ();
 
+    BigInt operator-- (int);
+    BigInt operator++ (int);
+
+
     friend BigInt operator~ (BigInt val);
 
     friend BigInt operator| (BigInt left, const BigInt& right);
