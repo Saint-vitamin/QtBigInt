@@ -23,19 +23,17 @@ class MINIGMPSHARED_EXPORT BigInt
 public:
     BigInt();
     BigInt(const BigInt& val );
-    BigInt(long long val );
-    BigInt(unsigned long long val );
     BigInt(const char *str, int base = 10);
     BigInt(std::string imput, int base = 10);
-    BigInt(int val);
-    BigInt(unsigned int val);
+    BigInt(long val);
+    BigInt(unsigned long val);
     BigInt(double val);
 
     std::string getString(int base = 10) const;
     ~BigInt();
 
     BigInt& powm(const BigInt &pow, const BigInt &mod);
-    BigInt& pow(unsigned int pow);
+    BigInt& pow(unsigned long pow);
     int sizeBits() const;
     int sizeBytes() const;
 
@@ -44,55 +42,47 @@ public:
      * @param pow
      * @return number 10 ^ pow
      */
-    static BigInt bigPow10(unsigned int pow);
+    static BigInt bigPow10(unsigned short pow);
 
     BigInt& operator = (const BigInt& val);
 
     friend BigInt operator + ( BigInt left, const BigInt& right);
-    friend BigInt operator + ( BigInt left, unsigned int right);
-    friend BigInt operator + ( BigInt left, int right);
+    friend BigInt operator + ( BigInt left, long right);
 
-    friend BigInt& operator += ( BigInt &left, unsigned int right);
-    friend BigInt& operator += ( BigInt &left, int right);
+    friend BigInt& operator += ( BigInt &left, long right);
     friend BigInt& operator += ( BigInt &left, const BigInt& right);
 
     friend BigInt operator - ( BigInt left, const BigInt& right);
-    friend BigInt operator - ( unsigned int right, BigInt left);
-    friend BigInt operator - ( BigInt left, unsigned int right);
-    friend BigInt operator - ( BigInt left, int right);
-    friend BigInt operator - ( int right, BigInt left);
+    friend BigInt operator - ( BigInt left, long right);
+    friend BigInt operator - ( long right, BigInt left);
+
     friend BigInt operator-(BigInt val);
 
-    friend BigInt& operator -= ( BigInt &left, unsigned int right);
-    friend BigInt& operator -= ( BigInt &left, int right);
-    friend BigInt& operator -= ( int left, BigInt & right);
-    friend BigInt& operator -= ( unsigned int left, BigInt & right);
-
+    friend BigInt& operator -= ( BigInt &left, long right);
+    friend BigInt& operator -= ( long left, BigInt & right);
     friend BigInt& operator -= ( BigInt &left, const BigInt& right);
 
     friend BigInt operator / ( BigInt left, const BigInt& right);
-    friend BigInt operator / ( BigInt left, unsigned int right);
-    friend BigInt operator / ( BigInt left, int right);
+    friend BigInt operator / ( BigInt left, long right);
 
-    friend BigInt& operator /= ( BigInt &left, unsigned int right);
-    friend BigInt& operator /= ( BigInt &left, int right);
+    friend BigInt& operator /= ( BigInt &left, long right);
     friend BigInt& operator /= ( BigInt &left, const BigInt& right);
 
     friend BigInt operator * ( BigInt left, const BigInt& right);
-    friend BigInt operator * ( BigInt left, unsigned int right);
-    friend BigInt operator * ( BigInt left, int right);
-    friend BigInt& operator *= ( BigInt &left, unsigned int right);
+    friend BigInt operator * ( BigInt left, unsigned long right);
+    friend BigInt operator * ( BigInt left, long right);
+    friend BigInt& operator *= ( BigInt &left, unsigned long right);
     friend BigInt& operator *= ( BigInt &left, const BigInt& right);
-    friend BigInt& operator *= ( BigInt &left, int right);
+    friend BigInt& operator *= ( BigInt &left, long right);
 
 
     friend BigInt operator % ( BigInt left, const BigInt& right);
-    friend BigInt operator % ( BigInt left, unsigned int right);
-    friend BigInt operator % ( BigInt left, int right);
+    friend BigInt operator % ( BigInt left, unsigned long right);
+    friend BigInt operator % ( BigInt left, long right);
 
 
-    friend BigInt& operator %= ( BigInt &left, unsigned int right);
-    friend BigInt& operator %= ( BigInt &left, int right);
+    friend BigInt& operator %= ( BigInt &left, unsigned long right);
+    friend BigInt& operator %= ( BigInt &left, long right);
     friend BigInt& operator %= ( BigInt &left, const BigInt& right);
 
 
@@ -109,30 +99,30 @@ public:
     friend BigInt& operator >>= ( BigInt &left, unsigned int right);
 
     friend bool operator == ( const BigInt& left, const BigInt& right);
-    friend bool operator == ( const BigInt& left, unsigned int right);
-    friend bool operator == ( const BigInt& left, int right);
+    friend bool operator == ( const BigInt& left, unsigned long right);
+    friend bool operator == ( const BigInt& left, long right);
 
     friend bool operator != ( const BigInt& left, const BigInt& right);
-    friend bool operator != ( const BigInt& left, unsigned int right);
-    friend bool operator != ( const BigInt& left, int right);
+    friend bool operator != ( const BigInt& left, unsigned long right);
+    friend bool operator != ( const BigInt& left, long right);
 
 
     friend bool operator < ( const BigInt& left, const BigInt& right);
-    friend bool operator < ( const BigInt& left, unsigned int right);
-    friend bool operator < ( const BigInt& left, int right);
+    friend bool operator < ( const BigInt& left, unsigned long right);
+    friend bool operator < ( const BigInt& left, long right);
 
     friend bool operator > ( const BigInt& left, const BigInt& right);
-    friend bool operator > ( const BigInt& left, unsigned int right);
-    friend bool operator > ( const BigInt& left, int right);
+    friend bool operator > ( const BigInt& left, unsigned long right);
+    friend bool operator > ( const BigInt& left, long right);
 
 
     friend bool operator <= ( const BigInt& left, const BigInt& right);
-    friend bool operator <= ( const BigInt& left, unsigned int right);
-    friend bool operator <= ( const BigInt& left, int right);
+    friend bool operator <= ( const BigInt& left, unsigned long right);
+    friend bool operator <= ( const BigInt& left, long right);
 
     friend bool operator >= ( const BigInt& left, const BigInt& right);
-    friend bool operator >= ( const BigInt& left, unsigned int right);
-    friend bool operator >= ( const BigInt& left, int right);
+    friend bool operator >= ( const BigInt& left, unsigned long right);
+    friend bool operator >= ( const BigInt& left, long right);
 
     friend bool operator!(const BigInt& val);
 
@@ -146,28 +136,28 @@ public:
     friend BigInt operator~ (BigInt val);
 
     friend BigInt operator| (BigInt left, const BigInt& right);
-    friend BigInt operator| (const BigInt &left, int right);
-    friend BigInt operator| (const BigInt &left, unsigned int right);
+    friend BigInt operator| (const BigInt &left, long right);
+    friend BigInt operator| (const BigInt &left, unsigned long right);
 
     friend BigInt& operator|= (BigInt &left, const BigInt& right);
-    friend BigInt& operator|= (BigInt &left, int right);
-    friend BigInt& operator|= (BigInt &left, unsigned int right);
+    friend BigInt& operator|= (BigInt &left, long right);
+    friend BigInt& operator|= (BigInt &left, unsigned long right);
 
     friend BigInt operator& (BigInt left, const BigInt& right);
-    friend BigInt operator& (const BigInt &left, int right);
-    friend BigInt operator& (const BigInt &left, unsigned int right);
+    friend BigInt operator& (const BigInt &left, long right);
+    friend BigInt operator& (const BigInt &left, unsigned long right);
 
     friend BigInt& operator&= (BigInt &left, const BigInt& right);
-    friend BigInt& operator&= (BigInt &left, int right);
-    friend BigInt& operator&= (BigInt &left, unsigned int right);
+    friend BigInt& operator&= (BigInt &left, long right);
+    friend BigInt& operator&= (BigInt &left, unsigned long right);
 
     friend BigInt operator^ (BigInt left, const BigInt& right);
-    friend BigInt operator^ (const BigInt &left, int right);
-    friend BigInt operator^ (const BigInt &left, unsigned int right);
+    friend BigInt operator^ (const BigInt &left, long right);
+    friend BigInt operator^ (const BigInt &left, unsigned long right);
 
     friend BigInt& operator^= (BigInt &left, const BigInt& right);
-    friend BigInt& operator^= (BigInt &left, int right);
-    friend BigInt& operator^= (BigInt &left, unsigned int right);
+    friend BigInt& operator^= (BigInt &left, long right);
+    friend BigInt& operator^= (BigInt &left, unsigned long right);
 
 };
 
