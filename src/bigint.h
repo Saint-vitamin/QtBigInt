@@ -23,6 +23,8 @@ class MINIGMPSHARED_EXPORT BigInt
 public:
     BigInt();
     BigInt(const BigInt& val );
+    BigInt(long long val );
+    BigInt(unsigned long long val );
     BigInt(const char *str, int base = 10);
     BigInt(std::string imput, int base = 10);
     BigInt(int val);
@@ -31,6 +33,16 @@ public:
 
     std::string getString(int base = 10) const;
     ~BigInt();
+
+    BigInt& powm(BigInt& pow, BigInt &mod);
+    BigInt& pow(unsigned int pow);
+
+    /**
+     * @brief bigPow10
+     * @param pow
+     * @return number 10 ^ pow
+     */
+    static BigInt bigPow10(unsigned int pow);
 
     BigInt& operator = (const BigInt& val);
 

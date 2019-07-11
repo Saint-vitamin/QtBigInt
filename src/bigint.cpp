@@ -6,6 +6,7 @@
 //#
 
 #include "bigint.h"
+#include <limits>
 
 // constructors
 BigInt::BigInt() {
@@ -15,6 +16,20 @@ BigInt::BigInt() {
 BigInt::BigInt(const BigInt &val):
     BigInt() {
     mpz_set(data, val.data);
+}
+
+BigInt::BigInt(long long val):
+    BigInt() {
+    mpz_set_si(data, static_cast<int>(val >> 32));          /* n = (int)sll >> 32 */
+    mpz_mul_2exp(data, data, 32 );                          /* n <<= 32 */
+    mpz_add_ui(data, data, static_cast<unsigned int>(val)); /* n += (unsigned int)sll */
+}
+
+BigInt::BigInt(unsigned long long val):
+    BigInt() {
+    mpz_set_ui(data, static_cast<unsigned int>(val >> 32));          /* n = (int)sll >> 32 */
+    mpz_mul_2exp(data, data, 32 );                          /* n <<= 32 */
+    mpz_add_ui(data, data, static_cast<unsigned int>(val)); /* n += (unsigned int)sll */
 }
 
 BigInt::BigInt(const char *str, int base):
@@ -50,6 +65,21 @@ std::string BigInt::getString(int base) const {
 BigInt::~BigInt() {
     mpz_clear(data);
 }
+
+BigInt &BigInt::powm(BigInt &pow, BigInt &mod) {
+    mpz_powm(data, data, pow.data, mod.data);
+    return *this;
+}
+
+BigInt &BigInt::pow(unsigned int pow) {
+    mpz_pow_ui(data, data, pow);
+    return *this;
+}
+
+BigInt BigInt::bigPow10(unsigned int pow) {
+    return "1" + std::string(pow, '0');
+}
+
 
 BigInt &BigInt::operator =(const BigInt &val) {
     mpz_set(data, val.data);

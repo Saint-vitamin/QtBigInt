@@ -1,6 +1,6 @@
 /* mini-gmp, a minimalistic implementation of a GNU GMP subset.
 
-Copyright 2011-2014 Free Software Foundation, Inc.
+Copyright 2011-2015 Free Software Foundation, Inc.
 
 This file is part of the GNU MP Library.
 
@@ -46,12 +46,12 @@ extern "C" {
 #endif
 
 void mp_set_memory_functions (void *(*) (size_t),
-                  void *(*) (void *, size_t, size_t),
-                  void (*) (void *, size_t));
+			      void *(*) (void *, size_t, size_t),
+			      void (*) (void *, size_t));
 
 void mp_get_memory_functions (void *(**) (size_t),
-                  void *(**) (void *, size_t, size_t),
-                  void (**) (void *, size_t));
+			      void *(**) (void *, size_t, size_t),
+			      void (**) (void *, size_t));
 
 typedef unsigned long mp_limb_t;
 typedef long mp_size_t;
@@ -63,10 +63,10 @@ typedef const mp_limb_t *mp_srcptr;
 typedef struct
 {
   int _mp_alloc;		/* Number of *limbs* allocated and pointed
-                   to by the _mp_d field.  */
+				   to by the _mp_d field.  */
   int _mp_size;			/* abs(_mp_size) is the number of limbs the
-                   last field points to.  If _mp_size is
-                   negative this is a negative number.  */
+				   last field points to.  If _mp_size is
+				   negative this is a negative number.  */
   mp_limb_t *_mp_d;		/* Pointer to the limbs.  */
 } __mpz_struct;
 
@@ -82,6 +82,7 @@ void mpn_copyd (mp_ptr, mp_srcptr, mp_size_t);
 void mpn_zero (mp_ptr, mp_size_t);
 
 int mpn_cmp (mp_srcptr, mp_srcptr, mp_size_t);
+int mpn_zero_p (mp_srcptr, mp_size_t);
 
 mp_limb_t mpn_add_1 (mp_ptr, mp_srcptr, mp_size_t, mp_limb_t);
 mp_limb_t mpn_add_n (mp_ptr, mp_srcptr, mp_srcptr, mp_size_t);
@@ -106,6 +107,9 @@ mp_limb_t mpn_rshift (mp_ptr, mp_srcptr, mp_size_t, unsigned int);
 
 mp_bitcnt_t mpn_scan0 (mp_srcptr, mp_bitcnt_t);
 mp_bitcnt_t mpn_scan1 (mp_srcptr, mp_bitcnt_t);
+
+void mpn_com (mp_ptr, mp_srcptr, mp_size_t);
+mp_limb_t mpn_neg (mp_ptr, mp_srcptr, mp_size_t);
 
 mp_bitcnt_t mpn_popcount (mp_srcptr, mp_size_t);
 
