@@ -5,7 +5,13 @@ CONFIG += qt console warn_on depend_includepath testcase
 CONFIG -= app_bundle
 
 TEMPLATE = app
-TARGET = miniGmpTests
+TARGET = QtBigIntTests
+
+CONFIG(release, debug|release): {
+    DESTDIR="$$PWD/build/release"
+} else {
+    DESTDIR="$$PWD/build/debug"
+}
 
 SOURCES +=  tst_arithmetictests.cpp
 

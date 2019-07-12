@@ -14,8 +14,8 @@ CONFIG(release, debug|release): {
 } else {
     MINIGMP_LIBRARY_OUTPUT_DIR="$$PWD/build/debug"
 }
-unix:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lminigmp
+unix:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lQtBigInt
 
-win32:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lminigmp
+win32:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lQtBigInt6
 
 INCLUDEPATH += "$$PWD"
