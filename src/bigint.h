@@ -42,6 +42,8 @@ public:
      */
     static BigInt bigPow10(unsigned short pow);
 
+    BigInt& toNegative();
+
     BigInt& operator = (const BigInt& val);
     BigInt& operator = (const std::string &imput);
     BigInt& operator = (long val);
@@ -52,6 +54,7 @@ public:
     friend BigInt operator + ( BigInt left, long right);
 
     friend BigInt operator + ( long left, BigInt right);
+    friend BigInt operator + ( const std::string &left, const BigInt &right);
 
     friend BigInt& operator += ( BigInt &left, long right);
     friend BigInt& operator += ( BigInt &left, const BigInt& right);
@@ -59,14 +62,16 @@ public:
 
     friend BigInt operator - ( BigInt left, const BigInt& right);
     friend BigInt operator - ( BigInt left, long right);
-    friend BigInt& operator - ( BigInt left, const std::string &right);
+    friend BigInt operator - ( BigInt left, const std::string &right);
 
     friend BigInt operator - ( long right, BigInt left);
+    friend BigInt operator - ( const std::string &right, const BigInt &left);
 
     friend BigInt operator-(BigInt val);
 
     friend BigInt& operator -= ( BigInt &left, long right);
-    friend BigInt& operator -= ( long left, BigInt & right);
+//    friend BigInt& operator -= ( long left, BigInt & right);
+
     friend BigInt& operator -= ( BigInt &left, const BigInt& right);
     friend BigInt& operator -= ( BigInt &left, const std::string &right);
 
@@ -74,6 +79,7 @@ public:
     friend BigInt operator / ( BigInt left, const std::string &right);
     friend BigInt operator / ( BigInt left, long right);
     friend BigInt operator / ( long left, BigInt right);
+    friend BigInt operator / ( const std::string &left, const BigInt &right);
 
     friend BigInt& operator /= ( BigInt &left, long right);
     friend BigInt& operator /= ( BigInt &left, const std::string &right);
@@ -94,6 +100,7 @@ public:
     friend BigInt operator % ( BigInt left, long right);
 
     friend BigInt operator % ( long left, BigInt right);
+    friend BigInt operator % ( const std::string & left, const BigInt &right);
 
     friend BigInt& operator %= ( BigInt &left, long right);
     friend BigInt& operator %= ( BigInt &left, const std::string &right);
@@ -110,32 +117,43 @@ public:
     friend bool operator == ( const BigInt& left, long right);
     friend bool operator == ( const BigInt& left, const std::string& right);
     friend bool operator == ( const std::string&  left, const BigInt&  right);
-
+    friend bool operator == ( const BigInt& left, const std::string&  right);
+    friend bool operator == ( long left, const std::string&  right);
 
     friend bool operator != ( const BigInt& left, const BigInt& right);
     friend bool operator != ( const BigInt& left, long right);
     friend bool operator != ( const BigInt& left, const std::string& str);
     friend bool operator != ( const std::string&  left, const BigInt&  right);
+    friend bool operator != ( const BigInt& left, const std::string&  right);
+    friend bool operator != ( long left, const std::string&  right);
 
     friend bool operator < ( const BigInt& left, const BigInt& right);
     friend bool operator < ( const BigInt& left, long right);
     friend bool operator < ( const BigInt& left, const std::string& str);
     friend bool operator < ( const std::string&  left, const BigInt&  right);
+    friend bool operator < ( const BigInt& left, const std::string&  right);
+    friend bool operator < ( long left, const std::string&  right);
 
     friend bool operator > ( const BigInt& left, const BigInt& right);
     friend bool operator > ( const BigInt& left, long right);
     friend bool operator > ( const BigInt& left, const std::string& str);
     friend bool operator > ( const std::string&  left, const BigInt&  right);
+    friend bool operator > ( const BigInt& left, const std::string&  right);
+    friend bool operator > ( long left, const std::string&  right);
 
     friend bool operator <= ( const BigInt& left, const BigInt& right);
     friend bool operator <= ( const BigInt& left, long right);
     friend bool operator <= ( const BigInt& left, const std::string& str);
     friend bool operator <= ( const std::string&  left, const BigInt&  right);
+    friend bool operator <= ( const BigInt& left, const std::string&  right);
+    friend bool operator <= ( long left, const std::string&  right);
 
     friend bool operator >= ( const BigInt& left, const BigInt& right);
     friend bool operator >= ( const BigInt& left, long right);
     friend bool operator >= ( const BigInt& left, const std::string& str);
     friend bool operator >= ( const std::string&  left, const BigInt&  right);
+    friend bool operator >= ( const BigInt& left, const std::string&  right);
+    friend bool operator >= ( long left, const std::string&  right);
 
     friend bool operator!(const BigInt& val);
 

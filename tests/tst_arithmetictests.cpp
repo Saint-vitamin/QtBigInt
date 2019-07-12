@@ -719,6 +719,8 @@ void arithmetictests::testPerators() {
     QVERIFY(num1.sizeBytes() == 8);
 
     num1 += std::numeric_limits<long>::max();
+    num1 += std::numeric_limits<long>::max();
+
     QVERIFY(num1.sizeBytes() == 16);
 
 }

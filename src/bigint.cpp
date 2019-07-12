@@ -59,6 +59,10 @@ BigInt BigInt::bigPow10(unsigned short pow) {
     return "1" + std::string(pow, '0');
 }
 
+BigInt &BigInt::toNegative() {
+    mpz_neg(data, data);
+    return *this;
+}
 
 BigInt &BigInt::operator =(const BigInt &val) {
     mpz_set(data, val.data);
@@ -95,6 +99,14 @@ BigInt operator +(BigInt left, const BigInt &right) {
     return left;
 }
 
+BigInt operator +(BigInt left, const std::string &right) {
+    return left += BigInt(right);
+}
+
+BigInt operator +(const std::string &left, const BigInt &right) {
+    return BigInt(left) + right;
+}
+
 BigInt& operator +=(BigInt &left, long right) {
     if (right >= 0) {
         mpz_add_ui(left.data, left.data, static_cast<unsigned long>(right));
@@ -106,6 +118,10 @@ BigInt& operator +=(BigInt &left, long right) {
 BigInt& operator +=(BigInt &left, const BigInt &right) {
     mpz_add(left.data, left.data, right.data);
     return left;
+}
+
+BigInt& operator +=(BigInt &left, const std::string &right) {
+    return left += BigInt(right);
 }
 
 //  sub operators
@@ -136,9 +152,21 @@ BigInt operator-(BigInt val) {
     return val;
 }
 
+BigInt operator -(BigInt left, const std::string &right) {
+    return left -= BigInt(right);
+}
+
+BigInt operator -(const std::string & left, const BigInt &right) {
+    return BigInt(left) - right;
+}
+
 BigInt& operator -=(BigInt &left, const BigInt &right) {
     mpz_sub(left.data, left.data, right.data);
     return left;
+}
+
+BigInt& operator -=(BigInt &left, const std::string &right) {
+    return left -= BigInt(right);
 }
 
 BigInt& operator -=(BigInt &left, long right) {
@@ -147,15 +175,6 @@ BigInt& operator -=(BigInt &left, long right) {
         return left;
     }
     return left += std::abs(right);
-}
-
-BigInt& operator -=(long left, BigInt & right) {
-    if (left >= 0) {
-        mpz_ui_sub(right.data, static_cast<unsigned long>(left), right.data);
-        return right;
-    }
-
-    return right += std::abs(left);
 }
 
 //  div operators
@@ -174,7 +193,15 @@ BigInt operator /(BigInt left, long right) {
     return -left;
 }
 
+BigInt operator /(BigInt left, const std::string &right) {
+    return left /= BigInt(right);
+}
+
 BigInt operator /(long left, BigInt right) {
+    return BigInt(left) / right;
+}
+
+BigInt operator /(const std::string & left, const BigInt &right) {
     return BigInt(left) / right;
 }
 
@@ -183,17 +210,20 @@ BigInt& operator /=(BigInt &left, const BigInt &right) {
     return left;
 }
 
+BigInt& operator /=(BigInt &left,  const std::string &right) {
+    return left /= BigInt(right);
+}
+
 BigInt& operator /=(BigInt &left, long right) {
     mpz_tdiv_q_ui(left.data, left.data, static_cast<unsigned long>(std::abs(right)));
 
     if (right >= 0) {
         return left;
     }
-    return 0 -= left ;
+    return left.toNegative();
 }
 
 // mul operators
-// TO-DO
 BigInt operator *(BigInt left, const BigInt &right) {
     mpz_mul(left.data, left.data, right.data);
     return left;
@@ -212,9 +242,21 @@ BigInt operator *(long left, BigInt right) {
     return right *= left;
 }
 
+BigInt operator *(const std::string & left, BigInt right) {
+    return right *= BigInt(left);
+}
+
+BigInt operator *(BigInt left, const std::string &right) {
+    return left *= BigInt(right);
+}
+
 BigInt& operator *=(BigInt &left, const BigInt &right) {
     mpz_mul(left.data, left.data, right.data);
     return left;
+}
+
+BigInt& operator *=(BigInt &left, const std::string &right) {
+    return left *= BigInt(right);
 }
 
 BigInt& operator *=(BigInt &left, long right) {
@@ -223,7 +265,7 @@ BigInt& operator *=(BigInt &left, long right) {
     if (right >= 0) {
         return left;
     }
-    return 0 -= left;
+    return left.toNegative();
 }
 
 //mod operations
@@ -241,6 +283,14 @@ BigInt operator %(long left, BigInt right) {
     return BigInt(left) % right;
 }
 
+BigInt operator %(BigInt left, const std::string & right) {
+    return left %= BigInt(right);
+}
+
+BigInt operator %(const std::string & left, const BigInt &right) {
+    return BigInt(left) % right;
+}
+
 BigInt& operator %=(BigInt& left, const BigInt &right) {
     mpz_tdiv_r(left.data, left.data, right.data);
     return left;
@@ -249,6 +299,10 @@ BigInt& operator %=(BigInt& left, const BigInt &right) {
 BigInt& operator %=(BigInt& left, long right) {
     mpz_tdiv_r_ui(left.data, left.data, static_cast<unsigned long>(std::abs(right)));
     return left;
+}
+
+BigInt& operator %=(BigInt &left, const std::string &right) {
+    return left %= BigInt(right);
 }
 
 // incriment and dicriment
@@ -400,8 +454,16 @@ bool operator == (const BigInt& left, long right) {
     return mpz_cmp_si(left.data, right) == 0;
 }
 
-bool operator == (const BigInt &left, const std::string &str) {
-    return left == BigInt(str);
+bool operator == (const BigInt &left, const std::string &right) {
+    return left == BigInt(right);
+}
+
+bool operator == ( long left, const BigInt & right) {
+    return right == left;
+}
+
+bool operator == ( const std::string & left, const BigInt & right) {
+    return right == BigInt(left);
 }
 
 bool operator != (const BigInt &left, const BigInt& right) {
@@ -412,12 +474,36 @@ bool operator != (const BigInt &left, long right) {
     return !(left == right);
 }
 
+bool operator != (const BigInt &left, const std::string &right) {
+    return left != BigInt(right);
+}
+
+bool operator != ( long left, const BigInt & right) {
+    return right != left;
+}
+
+bool operator != ( const std::string & left, const BigInt & right) {
+    return right != BigInt(left);
+}
+
 bool operator < ( const BigInt &left, const BigInt& right) {
     return mpz_cmp(left.data, right.data) < 0;
 }
 
 bool operator < ( const BigInt &left, long right) {
     return mpz_cmp_si(left.data, right) < 0;
+}
+
+bool operator < ( const BigInt &left, const std::string &right) {
+    return left < BigInt(right);
+}
+
+bool operator < ( long left, const BigInt & right) {
+    return right > left;
+}
+
+bool operator < ( const std::string & left, const BigInt & right) {
+    return right > BigInt(left);
 }
 
 bool operator > ( const BigInt &left, const BigInt& right) {
@@ -428,6 +514,18 @@ bool operator > ( const BigInt &left, long right) {
     return mpz_cmp_si(left.data, right) > 0;
 }
 
+bool operator > ( const BigInt &left, const std::string &right) {
+    return left > BigInt(right);
+}
+
+bool operator > ( long left, const BigInt & right) {
+    return right < left;
+}
+
+bool operator > ( const std::string & left, const BigInt & right) {
+    return right < BigInt(left);
+}
+
 bool operator <= ( const BigInt &left, const BigInt& right) {
     return mpz_cmp(left.data, right.data) <= 0;
 }
@@ -436,12 +534,36 @@ bool operator <= ( const BigInt &left, long right) {
     return mpz_cmp_si(left.data, right) <= 0;
 }
 
+bool operator <= ( const BigInt &left, const std::string &right) {
+    return left <= BigInt(right);
+}
+
+bool operator <= ( long left, const BigInt & right) {
+    return right >= left;
+}
+
+bool operator <= ( const std::string & left, const BigInt & right) {
+    return right >= BigInt(left);
+}
+
 bool operator >= ( const BigInt &left, const BigInt& right) {
     return mpz_cmp(left.data, right.data) >= 0;
 }
 
 bool operator >= ( const BigInt &left, long right) {
     return mpz_cmp_si(left.data, right) >= 0;
+}
+
+bool operator >= ( const BigInt &left, const std::string &right) {
+    return left >= BigInt(right);
+}
+
+bool operator >= ( long left, const BigInt & right) {
+    return right <= left;
+}
+
+bool operator >= ( const std::string & left, const BigInt & right) {
+    return right <= BigInt(left);
 }
 
 //// cast operations
