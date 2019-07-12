@@ -85,7 +85,7 @@ void arithmetictests::constructorsTest() {
     BigInt num1;        // should be 0 by default
     QVERIFY(num1 == 0);
 
-    BigInt num2(0);     // 0 passed as an integer
+    BigInt num2 (0);     // 0 passed as an integer
     QVERIFY(num2 == 0);
 
     BigInt num3("0");   // 0 passed as a string
@@ -164,7 +164,6 @@ void arithmetictests::arithmeticAssignmentMultiplicationTest() {
     QVERIFY(num3 == "20762936122929888116068405550279299956640101675030592995600");
     num3 *= 0;
     QVERIFY(num3 == 0);
-
     num3 = 1;
     num3 *= -1234567890;
     QVERIFY(num3 == -1234567890);
