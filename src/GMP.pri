@@ -18,4 +18,4 @@ unix:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lQtBigInt
 
 win32:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lQtBigInt6
 
-INCLUDEPATH += "$$PWD"
+include(GMPIncudePah.pri)

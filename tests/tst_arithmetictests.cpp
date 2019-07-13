@@ -67,7 +67,10 @@ private slots:
     // Relational operators with BigInts and integers or strings
     void shiftingTest();
 
-    void testPerators();
+    // test binary operations
+    void binTest();
+
+    void testOperators();
 
     void constructorsTest();
 
@@ -704,24 +707,54 @@ void arithmetictests::shiftingTest() {
     QVERIFY((num1 >>= 15) == num2);
 }
 
-void arithmetictests::testPerators() {
+void arithmetictests::binTest() {
+    BigInt num, num2;
+    int n1, n2;
+
+    for (int i = 0 ; i < 1000; ++i) {
+        num = n1 = rand();
+        num2 = n2 = rand();
+
+        QVERIFY((num | num2) == (n1 | n2));
+        QVERIFY((num & num2) == (n1 & n2));
+        QVERIFY((num ^ num2) == (n1 ^ n2));
+        QVERIFY((~num2) == (~n2));
+
+        QVERIFY((num | n2) == (n1 | num2));
+        QVERIFY((num & n2) == (n1 & num2));
+        QVERIFY((num ^ n2) == (n1 ^ num2));
+        QVERIFY((~num) == (~n1));
+
+        QVERIFY((n2 | num) == (num2 | n1));
+        QVERIFY((n2 & num) == (num2 & n1));
+        QVERIFY((n2 ^ num) == (num2 ^ n1));
+
+    }
+
+}
+
+void arithmetictests::testOperators() {
     BigInt num1;
 
     QVERIFY(num1.sizeBytes() == 0);
     num1 = 1;
 
-    QVERIFY(num1.sizeBytes() == 8);
+    QVERIFY(num1.sizeBytes() == sizeof (long));
 
     num1++;
-    QVERIFY(num1.sizeBytes() == 8);
+    QVERIFY(num1.sizeBytes() == sizeof (long));
 
     num1+= 0xFF;
-    QVERIFY(num1.sizeBytes() == 8);
+    QVERIFY(num1.sizeBytes() == sizeof (long));
 
     num1 += std::numeric_limits<long>::max();
     num1 += std::numeric_limits<long>::max();
 
-    QVERIFY(num1.sizeBytes() == 16);
+    QVERIFY(num1.sizeBytes() == sizeof (long) * 2);
+
+    num1 = 1;
+    QVERIFY(num1.sizeBytes() == sizeof (long));
+    QVERIFY(num1.sizeType() == sizeof (long) * 2);
 
 }
 

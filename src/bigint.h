@@ -21,8 +21,8 @@ class MINIGMPSHARED_EXPORT BigInt
 {
     mpz_t data;
 public:
-    BigInt();
-    BigInt(const BigInt& val );
+    BigInt();    
+    BigInt(const BigInt& val, int bitCount = -1);
     BigInt(const std::string &imput, int base = 10);
 //    BigInt(const char * str, int base = 10);
     BigInt(long val);
@@ -31,9 +31,15 @@ public:
     ~BigInt();
 
     BigInt& powm(const BigInt &pow, const BigInt &mod);
+    static BigInt powm(BigInt val, const BigInt & pow, const BigInt &mod);
+
     BigInt& pow(unsigned long pow);
     int sizeBits() const;
     int sizeBytes() const;
+    int sizeType() const;
+    bool isPrime(bool absalut = false) const;
+    BigInt& gcd(const BigInt &a, const BigInt &b);
+    void fromHex(const std::string& hex);
 
     /**
      * @brief bigPow10

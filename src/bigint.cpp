@@ -13,9 +13,15 @@ BigInt::BigInt() {
     mpz_init(data);
 }
 
-BigInt::BigInt(const BigInt &val):
-    BigInt() {
+BigInt::BigInt(const BigInt &val, int bitCount) {
+    if (bitCount > 0) {
+        mpz_init2(data, static_cast<unsigned int>(bitCount));
+    } else {
+        mpz_init(data);
+    }
+
     mpz_set(data, val.data);
+
 }
 
 BigInt::BigInt(const std::string &str, int base):
@@ -42,6 +48,10 @@ BigInt &BigInt::powm(const BigInt &pow, const BigInt &mod) {
     return *this;
 }
 
+BigInt BigInt::powm(BigInt val, const BigInt &pow, const BigInt &mod) {
+    return val.powm(pow, mod);
+}
+
 BigInt &BigInt::pow(unsigned long pow) {
     mpz_pow_ui(data, data, pow);
     return *this;
@@ -53,6 +63,27 @@ int BigInt::sizeBits() const {
 
 int BigInt::sizeBytes() const {
     return static_cast<int>(mpz_size(data) * sizeof ((*data->_mp_d)));
+}
+
+#define GMP_ABS(x) ((x) >= 0 ? (x) : -(x))
+int BigInt::sizeType() const {
+    return static_cast<int>(static_cast<size_t>(GMP_ABS( data->_mp_alloc)) *
+                            sizeof ((*data->_mp_d)));
+
+}
+
+bool BigInt::isPrime(bool absalut) const {
+    return (mpz_probab_prime_p(data, 50) - (absalut? 1: 0)) > 0;
+}
+
+BigInt& BigInt::gcd(const BigInt &a, const BigInt &b) {
+    mpz_gcd(data, a.data, b.data);
+    return *this;
+
+}
+
+void BigInt::fromHex(const std::string &hex) {
+    mpz_set_str(data, hex.c_str(), 16);
 }
 
 BigInt BigInt::bigPow10(unsigned short pow) {
