@@ -54,7 +54,6 @@ public:
     BigInt& operator = (const BigInt& val);
     BigInt& operator = (const std::string &imput);
     BigInt& operator = (long val);
-//    BigInt& operator = (const BigInt& val);
 
     friend BigInt operator + ( BigInt left, const BigInt& right);
     friend BigInt operator + ( BigInt left, const std::string &right);
@@ -77,7 +76,6 @@ public:
     friend BigInt operator-(BigInt val);
 
     friend BigInt& operator -= ( BigInt &left, long right);
-//    friend BigInt& operator -= ( long left, BigInt & right);
 
     friend BigInt& operator -= ( BigInt &left, const BigInt& right);
     friend BigInt& operator -= ( BigInt &left, const std::string &right);

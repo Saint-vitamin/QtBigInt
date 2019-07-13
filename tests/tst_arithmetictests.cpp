@@ -756,6 +756,7 @@ void arithmetictests::testOperators() {
     QVERIFY(num1.sizeBytes() == sizeof (long));
     QVERIFY(num1.sizeType() == sizeof (long) * 2);
 
+
 }
 
 

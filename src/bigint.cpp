@@ -7,6 +7,7 @@
 
 #include "bigint.h"
 #include <limits>
+#include <cstring>
 
 // constructors
 BigInt::BigInt() {
