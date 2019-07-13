@@ -34,6 +34,10 @@ BigInt::BigInt(long val):
     mpz_set_si(data, val);
 }
 
+BigInt::BigInt(char item, unsigned int size, int base = 2):
+    BigInt(std::string(size, item),base) {
+}
+
 std::string BigInt::getString(int base) const {
     char *str = mpz_get_str(nullptr, base, data);
     return str;

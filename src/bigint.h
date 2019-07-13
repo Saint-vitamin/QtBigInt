@@ -26,6 +26,7 @@ public:
     BigInt(const std::string &imput, int base = 10);
 //    BigInt(const char * str, int base = 10);
     BigInt(long val);
+    BigInt(char item, unsigned int size, int base);
 
     std::string getString(int base = 10) const;
     ~BigInt();
