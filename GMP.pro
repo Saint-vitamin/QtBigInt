@@ -9,11 +9,14 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS += \
-           src \
-           tests
+           src
 
 include($$PWD/tests/test.pri)
-VERSION = 6.1.2
 
 src.file = src/GMP.pro
-tests.file = tests/tests.pro
+
+gcc {
+    SUBDIRS += tests
+    tests.file = tests/tests.pro
+
+}
