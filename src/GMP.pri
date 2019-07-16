@@ -16,6 +16,6 @@ CONFIG(release, debug|release): {
 }
 unix:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lQtBigInt
 
-win32:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lQtBigInt6
+win32:LIBS += -L$$MINIGMP_LIBRARY_OUTPUT_DIR -lQtBigInt
 
 include(GMPIncudePah.pri)
