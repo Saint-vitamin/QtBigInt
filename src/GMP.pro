@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 TARGET = QtBigInt
 
 CONFIG += static
+VERSION = 6.1.2
 
 CONFIG(release, debug|release): {
     DESTDIR="$$PWD/build/release"
