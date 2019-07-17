@@ -1,2 +1,3 @@
 
-# QtBigInt
+# QtBigInt 
+use gmp lib
