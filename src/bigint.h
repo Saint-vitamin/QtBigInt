@@ -24,7 +24,6 @@ public:
     BigInt();    
     BigInt(const BigInt& val, int bitCount = -1);
     BigInt(const std::string &imput, int base = 10);
-//    BigInt(const char * str, int base = 10);
     BigInt(long val);
     BigInt(char item, unsigned int size, int base);
 
@@ -35,8 +34,21 @@ public:
     static BigInt powm(BigInt val, const BigInt & pow, const BigInt &mod);
 
     BigInt& pow(unsigned long pow);
+    BigInt& log(int base);
+    /**
+     * @brief sizeBits
+     * @return size of bits in memory
+     */
     int sizeBits() const;
     int sizeBytes() const;
+
+    /**
+     * @brief longBits
+     * @return current long in Bits of number
+     */
+    int longBits() const;
+    int longBytes() const;
+
     int sizeType() const;
     bool isPrime(bool absalut = false) const;
     BigInt& gcd(const BigInt &a, const BigInt &b);

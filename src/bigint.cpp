@@ -8,6 +8,7 @@
 #include "bigint.h"
 #include <limits>
 #include <cstring>
+#include <cmath>
 
 // constructors
 BigInt::BigInt() {
@@ -68,6 +69,14 @@ int BigInt::sizeBits() const {
 
 int BigInt::sizeBytes() const {
     return static_cast<int>(mpz_size(data) * sizeof ((*data->_mp_d)));
+}
+
+int BigInt::longBits() const {
+    return static_cast<int>(getString(2).size());
+}
+
+int BigInt::longBytes() const {
+    return static_cast<int>(std::ceil(static_cast<double>(longBits()) / 8));
 }
 
 #define GMP_ABS(x) ((x) >= 0 ? (x) : -(x))
