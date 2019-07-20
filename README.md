@@ -1,5 +1,4 @@
 
-# QtBigInt
 # ![QtBigInt Logo](res/png/QtBigIntLogo2.png)
 
 QtBigInt - Arbitrary-sized integer class for C++ and build system of Qt (qmake)
