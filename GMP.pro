@@ -15,8 +15,5 @@ include($$PWD/tests/test.pri)
 
 src.file = src/GMP.pro
 
-gcc {
-    SUBDIRS += tests
-    tests.file = tests/tests.pro
-
-}
+SUBDIRS += tests
+tests.file = tests/tests.pro

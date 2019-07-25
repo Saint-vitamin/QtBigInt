@@ -739,22 +739,22 @@ void arithmetictests::testOperators() {
     QVERIFY(num1.sizeBytes() == 0);
     num1 = 1;
 
-    QVERIFY(num1.sizeBytes() == sizeof (long));
+    QVERIFY(num1.sizeBytes() == sizeof (intMpz));
 
     num1++;
-    QVERIFY(num1.sizeBytes() == sizeof (long));
+    QVERIFY(num1.sizeBytes() == sizeof (intMpz));
 
     num1+= 0xFF;
-    QVERIFY(num1.sizeBytes() == sizeof (long));
+    QVERIFY(num1.sizeBytes() == sizeof (intMpz));
 
-    num1 += std::numeric_limits<long>::max();
-    num1 += std::numeric_limits<long>::max();
+    num1 += std::numeric_limits<intMpz>::max();
+    num1 += std::numeric_limits<intMpz>::max();
 
-    QVERIFY(num1.sizeBytes() == sizeof (long) * 2);
+    QVERIFY(num1.sizeBytes() == sizeof (intMpz) * 2);
 
     num1 = 1;
-    QVERIFY(num1.sizeBytes() == sizeof (long));
-    QVERIFY(num1.sizeType() == sizeof (long) * 2);
+    QVERIFY(num1.sizeBytes() == sizeof (intMpz));
+    QVERIFY(num1.sizeType() == sizeof (intMpz) * 2);
 
 
 }

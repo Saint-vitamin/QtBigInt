@@ -53,8 +53,8 @@ void mp_get_memory_functions (void *(**) (size_t),
                   void *(**) (void *, size_t, size_t),
                   void (**) (void *, size_t));
 
-typedef unsigned long uIntMpz;
-typedef long intMpz;
+typedef unsigned long long uIntMpz;
+typedef long long intMpz;
 
 typedef uIntMpz mp_limb_t;
 typedef intMpz mp_size_t;
