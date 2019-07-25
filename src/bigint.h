@@ -24,7 +24,7 @@ public:
     BigInt();    
     BigInt(const BigInt& val, int bitCount = -1);
     BigInt(const std::string &imput, int base = 10);
-    BigInt(long val);
+    BigInt(intMpz val);
     BigInt(char item, unsigned int size, int base);
 
     std::string getString(int base = 10) const;
@@ -33,7 +33,7 @@ public:
     BigInt& powm(const BigInt &pow, const BigInt &mod);
     static BigInt powm(BigInt val, const BigInt & pow, const BigInt &mod);
 
-    BigInt& pow(unsigned long pow);
+    BigInt& pow(uIntMpz pow);
     BigInt& log(int base);
     /**
      * @brief sizeBits
@@ -44,7 +44,7 @@ public:
 
     /**
      * @brief longBits
-     * @return current long in Bits of number
+     * @return current length in Bits of number
      */
     int longBits() const;
     int longBytes() const;
@@ -65,61 +65,61 @@ public:
 
     BigInt& operator = (const BigInt& val);
     BigInt& operator = (const std::string &imput);
-    BigInt& operator = (long val);
+    BigInt& operator = (intMpz val);
 
     friend BigInt operator + ( BigInt left, const BigInt& right);
     friend BigInt operator + ( BigInt left, const std::string &right);
-    friend BigInt operator + ( BigInt left, long right);
+    friend BigInt operator + ( BigInt left, intMpz right);
 
-    friend BigInt operator + ( long left, BigInt right);
+    friend BigInt operator + ( intMpz left, BigInt right);
     friend BigInt operator + ( const std::string &left, const BigInt &right);
 
-    friend BigInt& operator += ( BigInt &left, long right);
+    friend BigInt& operator += ( BigInt &left, intMpz right);
     friend BigInt& operator += ( BigInt &left, const BigInt& right);
     friend BigInt& operator += ( BigInt &left, const std::string &right);
 
     friend BigInt operator - ( BigInt left, const BigInt& right);
-    friend BigInt operator - ( BigInt left, long right);
+    friend BigInt operator - ( BigInt left, intMpz right);
     friend BigInt operator - ( BigInt left, const std::string &right);
 
-    friend BigInt operator - ( long right, BigInt left);
+    friend BigInt operator - ( intMpz right, BigInt left);
     friend BigInt operator - ( const std::string &right, const BigInt &left);
 
     friend BigInt operator-(BigInt val);
 
-    friend BigInt& operator -= ( BigInt &left, long right);
+    friend BigInt& operator -= ( BigInt &left, intMpz right);
 
     friend BigInt& operator -= ( BigInt &left, const BigInt& right);
     friend BigInt& operator -= ( BigInt &left, const std::string &right);
 
     friend BigInt operator / ( BigInt left, const BigInt& right);
     friend BigInt operator / ( BigInt left, const std::string &right);
-    friend BigInt operator / ( BigInt left, long right);
-    friend BigInt operator / ( long left, BigInt right);
+    friend BigInt operator / ( BigInt left, intMpz right);
+    friend BigInt operator / ( intMpz left, BigInt right);
     friend BigInt operator / ( const std::string &left, const BigInt &right);
 
-    friend BigInt& operator /= ( BigInt &left, long right);
+    friend BigInt& operator /= ( BigInt &left, intMpz right);
     friend BigInt& operator /= ( BigInt &left, const std::string &right);
     friend BigInt& operator /= ( BigInt &left, const BigInt& right);
 
     friend BigInt operator * ( BigInt left, const BigInt& right);
     friend BigInt operator * ( BigInt left, const std::string &right);
-    friend BigInt operator * ( BigInt left, long right);
+    friend BigInt operator * ( BigInt left, intMpz right);
 
-    friend BigInt operator * ( long left, BigInt right);
+    friend BigInt operator * ( intMpz left, BigInt right);
 
     friend BigInt& operator *= ( BigInt &left, const BigInt& right);
-    friend BigInt& operator *= ( BigInt &left, long right);
+    friend BigInt& operator *= ( BigInt &left, intMpz right);
     friend BigInt& operator *= ( BigInt &left, const std::string &right);
 
     friend BigInt operator % ( BigInt left, const BigInt& right);
     friend BigInt operator % ( BigInt left, const std::string &right);
-    friend BigInt operator % ( BigInt left, long right);
+    friend BigInt operator % ( BigInt left, intMpz right);
 
-    friend BigInt operator % ( long left, BigInt right);
+    friend BigInt operator % ( intMpz left, BigInt right);
     friend BigInt operator % ( const std::string & left, const BigInt &right);
 
-    friend BigInt& operator %= ( BigInt &left, long right);
+    friend BigInt& operator %= ( BigInt &left, intMpz right);
     friend BigInt& operator %= ( BigInt &left, const std::string &right);
 
     friend BigInt& operator %= ( BigInt &left, const BigInt& right);
@@ -131,46 +131,46 @@ public:
     friend BigInt& operator >>= ( BigInt &left, int right);
 
     friend bool operator == ( const BigInt& left, const BigInt& right);
-    friend bool operator == ( const BigInt& left, long right);
+    friend bool operator == ( const BigInt& left, intMpz right);
     friend bool operator == ( const BigInt& left, const std::string& right);
     friend bool operator == ( const std::string&  left, const BigInt&  right);
     friend bool operator == ( const BigInt& left, const std::string&  right);
-    friend bool operator == ( long left, const std::string&  right);
+    friend bool operator == ( intMpz left, const std::string&  right);
 
     friend bool operator != ( const BigInt& left, const BigInt& right);
-    friend bool operator != ( const BigInt& left, long right);
+    friend bool operator != ( const BigInt& left, intMpz right);
     friend bool operator != ( const BigInt& left, const std::string& str);
     friend bool operator != ( const std::string&  left, const BigInt&  right);
     friend bool operator != ( const BigInt& left, const std::string&  right);
-    friend bool operator != ( long left, const std::string&  right);
+    friend bool operator != ( intMpz left, const std::string&  right);
 
     friend bool operator < ( const BigInt& left, const BigInt& right);
-    friend bool operator < ( const BigInt& left, long right);
+    friend bool operator < ( const BigInt& left, intMpz right);
     friend bool operator < ( const BigInt& left, const std::string& str);
     friend bool operator < ( const std::string&  left, const BigInt&  right);
     friend bool operator < ( const BigInt& left, const std::string&  right);
-    friend bool operator < ( long left, const std::string&  right);
+    friend bool operator < ( intMpz left, const std::string&  right);
 
     friend bool operator > ( const BigInt& left, const BigInt& right);
-    friend bool operator > ( const BigInt& left, long right);
+    friend bool operator > ( const BigInt& left, intMpz right);
     friend bool operator > ( const BigInt& left, const std::string& str);
     friend bool operator > ( const std::string&  left, const BigInt&  right);
     friend bool operator > ( const BigInt& left, const std::string&  right);
-    friend bool operator > ( long left, const std::string&  right);
+    friend bool operator > ( intMpz left, const std::string&  right);
 
     friend bool operator <= ( const BigInt& left, const BigInt& right);
-    friend bool operator <= ( const BigInt& left, long right);
+    friend bool operator <= ( const BigInt& left, intMpz right);
     friend bool operator <= ( const BigInt& left, const std::string& str);
     friend bool operator <= ( const std::string&  left, const BigInt&  right);
     friend bool operator <= ( const BigInt& left, const std::string&  right);
-    friend bool operator <= ( long left, const std::string&  right);
+    friend bool operator <= ( intMpz left, const std::string&  right);
 
     friend bool operator >= ( const BigInt& left, const BigInt& right);
-    friend bool operator >= ( const BigInt& left, long right);
+    friend bool operator >= ( const BigInt& left, intMpz right);
     friend bool operator >= ( const BigInt& left, const std::string& str);
     friend bool operator >= ( const std::string&  left, const BigInt&  right);
     friend bool operator >= ( const BigInt& left, const std::string&  right);
-    friend bool operator >= ( long left, const std::string&  right);
+    friend bool operator >= ( intMpz left, const std::string&  right);
 
     friend bool operator!(const BigInt& val);
 
@@ -184,22 +184,22 @@ public:
     friend BigInt operator~ (BigInt val);
 
     friend BigInt operator| (BigInt left, const BigInt& right);
-    friend BigInt operator| (const BigInt &left, long right);
+    friend BigInt operator| (const BigInt &left, intMpz right);
 
     friend BigInt& operator|= (BigInt &left, const BigInt& right);
-    friend BigInt& operator|= (BigInt &left, long right);
+    friend BigInt& operator|= (BigInt &left, intMpz right);
 
     friend BigInt operator& (BigInt left, const BigInt& right);
-    friend BigInt operator& (const BigInt &left, long right);
+    friend BigInt operator& (const BigInt &left, intMpz right);
 
     friend BigInt& operator&= (BigInt &left, const BigInt& right);
-    friend BigInt& operator&= (BigInt &left, long right);
+    friend BigInt& operator&= (BigInt &left, intMpz right);
 
     friend BigInt operator^ (BigInt left, const BigInt& right);
-    friend BigInt operator^ (const BigInt &left, long right);
+    friend BigInt operator^ (const BigInt &left, intMpz right);
 
     friend BigInt& operator^= (BigInt &left, const BigInt& right);
-    friend BigInt& operator^= (BigInt &left, long right);
+    friend BigInt& operator^= (BigInt &left, intMpz right);
 
 };
 
